@@ -9,16 +9,6 @@ import ErrorMessage from '../components/ErrorMessage.jsx';
 import Login from '../components/Login.jsx';
 import styles from '../App.module.css';
 
-
-
-// await axios.post('http://localhost:5001/history', { userId: user.userId, history: [newHistoryEntry] });
-// await axios.post('http://localhost:5001/history', { userId: user.userId, history: historyEntries });
-// const response = await axios.get(`http://localhost:5001/history/${user.userId}`);
-
-
-
-
-
 function Home() {
   const [input, setInput] = useState('');
   const [threshold, setThreshold] = useState(50);
@@ -30,6 +20,7 @@ function Home() {
   const [user, setUser] = useState(null);
 
   const MAX_LENGTH = 2000;
+  const PORT = 5000; // Change to 5001 if server uses 5001
 
   const analyzeContent = async (text = input, isBatch = false) => {
     if (!text.trim()) {
@@ -60,11 +51,11 @@ function Home() {
           timestamp: new Date().toLocaleString(),
           threshold,
         };
-        console.log('Adding to local history:', newHistoryEntry); // Debug
+        console.log('Adding to local history:', newHistoryEntry);
         setHistory((prev) => [newHistoryEntry, ...prev.slice(0, 9)]);
         if (user) {
-          console.log('Saving to server for user:', user.userId); // Debug
-          await axios.post('http://localhost:5000/history', { userId: user.userId, history: [newHistoryEntry] })
+          console.log('Saving to server for user:', user.userId);
+          await axios.post(`http://localhost:${PORT}/history`, { userId: user.userId, history: [newHistoryEntry] })
             .catch(err => console.error('Server history save failed:', err.response?.data || err.message));
         }
       }
@@ -162,7 +153,7 @@ function Home() {
           timestamp: new Date().toLocaleString(),
           threshold,
         }));
-        await axios.post('http://localhost:5000/history', { userId: user.userId, history: historyEntries });
+        await axios.post(`http://localhost:${PORT}/history`, { userId: user.userId, history: historyEntries });
       }
     } catch (err) {
       setError(`Batch analysis failed: ${err.message}`);
@@ -174,18 +165,17 @@ function Home() {
   const loadHistory = async () => {
     if (!user) return;
     try {
-      const response = await axios.get(`http://localhost:5001/history/${user.userId}`);
-      setHistory(response.data.slice(0, 10)); // Limit to 10 for display
+      const response = await axios.get(`http://localhost:${PORT}/history/${user.userId}`);
+      setHistory(response.data.slice(0, 10));
     } catch (err) {
       setError(`Failed to load history: ${err.message}`);
     }
   };
 
-
   useEffect(() => {
     if (!input.trim()) return;
     const debounce = setTimeout(() => {
-      analyzeContent(input);
+      analyzeContent(input).catch(err => console.error('Real-time analysis error:', err));
     }, 500);
     return () => clearTimeout(debounce);
   }, [input, threshold]);
@@ -194,32 +184,26 @@ function Home() {
     if (user) loadHistory();
   }, [user]);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      console.log('Home found stored user:', JSON.parse(storedUser));
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
   const handleLogout = () => {
+    localStorage.removeItem('user');
     setUser(null);
     setHistory([]);
   };
 
-
-  
-  useEffect(() => {
-    console.log('User updated:', user); // Debug
-    if (user) loadHistory();
-  }, [user]);
-
-
-
-
-
-
-
-
-  console.log('User state:', user);
   return (
     <>
       <Header />
       <main className={styles.main}>
         {!user ? (
-          <Login setUser={setUser} setError={setError} />
+          <Login setUser={setUser} />
         ) : (
           <>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
@@ -245,7 +229,7 @@ function Home() {
         )}
       </main>
       <footer className={styles.footer}>
-        © 2025 Harm Detector
+        © 2025 Harm Detector - College Project
       </footer>
     </>
   );
