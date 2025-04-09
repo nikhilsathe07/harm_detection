@@ -1,64 +1,8 @@
 .app {
   min-height: 100vh;
   padding: 2rem;
-  font-family: 'Inter', sans-serif;
-  background: #f9fafb;
-  color: #1f2937;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-.app.dark {
   background: #111827;
   color: #e5e7eb;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 2.5rem;
-  position: relative;
-}
-
-.header h1 {
-  font-size: 2.25rem;
-  font-weight: 700;
-  margin: 0;
-  color: #1d4ed8;
-}
-
-.app.dark .header h1 {
-  color: #3b82f6;
-}
-
-.header p {
-  font-size: 1rem;
-  color: #6b7280;
-  margin: 0.5rem 0 0;
-}
-
-.app.dark .header p {
-  color: #9ca3af;
-}
-
-.themeToggle {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0.5rem 1rem;
-  background: #1d4ed8;
-  color: white;
-  border: none;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  font-size: 0.875rem;
-  transition: background 0.2s ease;
-}
-
-.themeToggle:hover {
-  background: #1e40af;
-}
-
-.app.dark .themeToggle {
-  background: #3b82f6;
 }
 
 .main {
@@ -66,20 +10,33 @@
   margin: 0 auto;
 }
 
-.inputSection {
-  background: white;
-  padding: 1rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  margin-bottom: 2rem;
-  display: flex; /* Added flexbox for better control */
-  flex-direction: column;
-  gap: 1rem; /* Consistent spacing between children */
+.header {
+  text-align: center;
+  margin-bottom: 2.5rem;
 }
 
-.app.dark .inputSection {
+.header h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin: 0;
+  color: #3b82f6;
+}
+
+.header p {
+  font-size: 1rem;
+  color: #9ca3af;
+  margin: 0.5rem 0 0;
+}
+
+.inputSection {
   background: #1f2937;
+  padding: 1rem;
+  border-radius: 0.75rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .toggle {
@@ -89,63 +46,73 @@
 }
 
 .toggle input {
-  accent-color: #1d4ed8;
-}
-
-.app.dark .toggle input {
   accent-color: #3b82f6;
 }
 
 .toggle label {
   font-size: 0.875rem;
-  color: #4b5563;
-}
-
-.app.dark .toggle label {
   color: #d1d5db;
 }
 
-.textarea {
-  width: 100%; /* Stays within parent */
-  padding: 0.75rem; /* Reduced padding to fit better */
-  border: 1px solid #d1d5db;
+.threshold {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.threshold label {
+  font-size: 0.875rem;
+  color: #d1d5db;
+}
+
+.threshold input {
+  width: 60px;
+  padding: 0.5rem;
+  border: 1px solid #4b5563;
   border-radius: 0.5rem;
-  font-size: 0.875rem; /* Smaller font for better fit */
-  line-height: 1.5; /* Prevents text overlap */
-  min-height: 120px; /* Consistent height */
-  resize: vertical;
-  box-sizing: border-box; /* Ensures padding stays inside width */
-  outline: none;
-  transition: border-color 0.2s ease;
-  /* Removed margin-right: 2rem to prevent overflow */
-}
-
-.textarea:focus {
-  border-color: #1d4ed8;
-}
-
-.app.dark .textarea {
   background: #374151;
-  border-color: #4b5563;
+  color: #f9fafb;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.threshold input:focus {
+  border-color: #3b82f6;
+}
+
+.textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #4b5563;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  min-height: 120px;
+  resize: vertical;
+  box-sizing: border-box;
+  outline: none;
+  background: #374151;
   color: #f9fafb;
 }
 
-.app.dark .textarea:focus {
+.textarea:focus {
   border-color: #3b82f6;
 }
 
 .textarea::placeholder {
-  color: #9ca3af;
+  color: #6b7280;
 }
 
-.app.dark .textarea::placeholder {
-  color: #6b7280;
+.fileInput {
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  color: #d1d5db;
 }
 
 .button {
   width: 100%;
   padding: 0.75rem;
-  background: #1d4ed8;
+  background: #3b82f6;
   color: white;
   border: none;
   border-radius: 0.5rem;
@@ -161,14 +128,6 @@
 }
 
 .button:hover:not(:disabled) {
-  background: #1e40af;
-}
-
-.app.dark .button {
-  background: #3b82f6;
-}
-
-.app.dark .button:hover:not(:disabled) {
   background: #2563eb;
 }
 
@@ -177,17 +136,11 @@
   align-items: center;
   gap: 0.75rem;
   padding: 1rem;
-  background: #fef2f2;
-  border: 1px solid #f87171;
-  border-radius: 0.5rem;
-  color: #b91c1c;
-  margin-bottom: 2rem;
-}
-
-.app.dark .error {
   background: #4b1c1c;
-  border-color: #dc2626;
+  border: 1px solid #dc2626;
+  border-radius: 0.5rem;
   color: #fecaca;
+  margin-bottom: 2rem;
 }
 
 .errorIcon {
@@ -196,25 +149,17 @@
 }
 
 .result {
-  background: white;
+  background: #1f2937;
   padding: 1.5rem;
   border-radius: 0.75rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
-}
-
-.app.dark .result {
-  background: #1f2937;
 }
 
 .result h2 {
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 1rem;
-  color: #1d4ed8;
-}
-
-.app.dark .result h2 {
   color: #3b82f6;
 }
 
@@ -225,20 +170,24 @@
 
 .result span {
   font-weight: 500;
-  color: #4b5563;
-}
-
-.app.dark .result span {
   color: #d1d5db;
 }
 
 .score {
   font-weight: 600;
-  color: #1d4ed8;
+  color: #3b82f6;
 }
 
-.app.dark .score {
-  color: #3b82f6;
+.sentiment {
+  font-weight: 600;
+}
+
+.positive {
+  color: #16a34a;
+}
+
+.negative {
+  color: #dc2626;
 }
 
 .harmful {
@@ -251,15 +200,48 @@
   font-weight: 500;
 }
 
-.history {
-  background: white;
+.batchResult {
+  background: #1f2937;
   padding: 1.5rem;
   border-radius: 0.75rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
 }
 
-.app.dark .history {
+.batchResult h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  color: #3b82f6;
+}
+
+.batchTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.batchTable th,
+.batchTable td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #374151;
+}
+
+.batchTable th {
+  font-weight: 600;
+  color: #d1d5db;
+}
+
+.batchTable td {
+  font-size: 0.875rem;
+  color: #e5e7eb;
+}
+
+.history {
   background: #1f2937;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .historyHeader {
@@ -267,22 +249,20 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .historyHeader h2 {
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0;
-  color: #1d4ed8;
-}
-
-.app.dark .historyHeader h2 {
   color: #3b82f6;
 }
 
 .clearButton {
   padding: 0.5rem 1rem;
-  background: #ef4444;
+  background: #f87171;
   color: white;
   border: none;
   border-radius: 0.375rem;
@@ -295,11 +275,83 @@
   background: #dc2626;
 }
 
-.app.dark .clearButton {
-  background: #f87171;
+.exportButton {
+  padding: 0.5rem 1rem;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background 0.2s ease;
 }
 
-.app.dark .clearButton:hover {
+.exportButton:hover {
+  background: #059669;
+}
+
+.login {
+  background: #1f2937;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.login h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  color: #3b82f6;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.loginForm input {
+  padding: 0.75rem;
+  border: 1px solid #4b5563;
+  border-radius: 0.5rem;
+  background: #374151;
+  color: #f9fafb;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.loginForm input:focus {
+  border-color: #3b82f6;
+}
+
+.loginForm button {
+  padding: 0.75rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+}
+
+.loginForm button:hover {
+  background: #2563eb;
+}
+
+.logoutButton {
+  padding: 0.5rem 1rem;
+  background: #f87171;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background 0.2s ease;
+}
+
+.logoutButton:hover {
   background: #dc2626;
 }
 
@@ -310,10 +362,6 @@
 
 .historyItem {
   padding: 1rem 0;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.app.dark .historyItem {
   border-bottom: 1px solid #374151;
 }
 
@@ -328,19 +376,11 @@
 
 .historyItem span {
   font-weight: 500;
-  color: #4b5563;
-}
-
-.app.dark .historyItem span {
   color: #d1d5db;
 }
 
 .timestamp {
   font-size: 0.75rem;
-  color: #6b7280;
-}
-
-.app.dark .timestamp {
   color: #9ca3af;
 }
 
@@ -348,14 +388,9 @@
   text-align: center;
   padding: 1rem 0;
   font-size: 0.875rem;
-  color: #6b7280;
-}
-
-.app.dark .footer {
   color: #9ca3af;
 }
 
-/* Responsive Design */
 @media (max-width: 600px) {
   .app {
     padding: 1rem;
@@ -369,28 +404,27 @@
     font-size: 0.875rem;
   }
 
-  .themeToggle {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.75rem;
-  }
-
   .inputSection,
   .result,
-  .history {
+  .batchResult,
+  .history,
+  .login {
     padding: 1rem;
   }
 
   .button {
-    padding: 0.626rem;
+    padding: 0.625rem;
     font-size: 0.875rem;
   }
 
   .result h2,
-  .historyHeader h2 {
+  .batchResult h2,
+  .historyHeader h2,
+  .login h2 {
     font-size: 1.125rem;
   }
 
   .textarea {
-    min-height: 100px; /* Adjusted for mobile */
+    min-height: 100px;
   }
 }
