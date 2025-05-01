@@ -174,13 +174,13 @@ function Home() {
     localStorage.removeItem('history');
   };
 
-  useEffect(() => {
-    if (!input.trim()) return;
-    const debounce = setTimeout(() => {
-      analyzeContent(input).catch(err => console.error('Real-time analysis error:', err));
-    }, 500);
-    return () => clearTimeout(debounce);
-  }, [input, threshold]);
+  // useEffect(() => {
+  //   if (!input.trim()) return;
+  //   const debounce = setTimeout(() => {
+  //     analyzeContent(input).catch(err => console.error('Real-time analysis error:', err));
+  //   }, 10000);
+  //   return () => clearTimeout(debounce);
+  // }, [input, threshold]);
 
   return (
     <>
