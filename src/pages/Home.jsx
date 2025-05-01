@@ -201,7 +201,7 @@ function Home() {
         <History history={history} clearHistory={clearHistory} />
       </main>
       <footer className={styles.footer}>
-        © 2025 Harm Detector - College Project
+        © 2025 Harm Detector
       </footer>
     </>
   );
